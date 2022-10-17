@@ -3,6 +3,7 @@ export default ({
     js,
     styles,
     helmet,
+    data
 }) => `
     <!doctype html>
     <html>
@@ -20,7 +21,8 @@ export default ({
       <div id="react-root">${appString}</div>
       
       ${js}
-      
+      <script>window._frontloadData=${JSON.stringify(data)}</script>
+
     </body>
     </html>
 `;

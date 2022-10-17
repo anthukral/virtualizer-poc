@@ -1,7 +1,9 @@
 import React from 'react';
 import { hydrate } from 'react-dom';
-
+import {createFrontloadState} from "react-frontload"
 import App from '../shared/App';
+import {BrowserRouter} from 'react-router-dom'
+import { FrontloadProvider } from 'react-frontload'
 
 /**
  * Renders a react component into the #react-root div container.
@@ -10,9 +12,22 @@ import App from '../shared/App';
  *
  * @param Component React component that should be rendered
  */
+
+
 const render = (Component) => {
+    const frontloadState = createFrontloadState.client({
+        // inject client impl of api for use in data loading functions.
+        // will probably make HTTP calls to the server  
+        // hydrate state from SSR
+        context:{},
+        serverRenderedData: window._frontloadData
+     });
     hydrate(
-        <Component/>,
+        <FrontloadProvider frontloadState={frontloadState}>
+
+        <BrowserRouter>       <Component frontloadState={frontloadState}/></BrowserRouter>
+        </FrontloadProvider>
+        ,
         document.getElementById('react-root'),
     );
 };

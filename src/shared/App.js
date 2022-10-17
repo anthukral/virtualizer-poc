@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
-
-import './app.styl';
-
-import UniversalComponent from './components/UniversalComponent';
+import ListingPage from './components/Listing';
+import { FrontloadProvider } from 'react-frontload'
 
 /**
  * The `App` component is the entry point for the react app.
@@ -11,17 +9,10 @@ import UniversalComponent from './components/UniversalComponent';
  *
  * You can start developing your react app here.
  */
-export default class App extends Component {
-    render() {
-        return (
-            <div>
-                <Helmet>
-                    <title>App Component | React Universal</title>
-                </Helmet>
-
-                <h1>Welcome to React Fiber.</h1>
-                <UniversalComponent name="getting-started" />
-            </div>
+export default function App(props){   
+    return (   
+          
+            <ListingPage/>
         );
-    }
+ 
 }
